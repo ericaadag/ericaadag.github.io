@@ -1,175 +1,626 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Erica Dzifa Agbana, a Computer Science student and aspiring AI Research Scientist.">
-  <title>Erica Dzifa Agbana - Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #6a4c9c;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-    }
-    header p {
-      margin: 5px 0;
-    }
-    section {
-      margin: 20px;
-    }
-    .skills, .projects {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .skills div, .projects div {
-      background: #fff;
-      margin: 10px;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: calc(33% - 20px);
-    }
-    .skills div {
-      background-color: #e1e8f0;
-    }
-    .projects div {
-      background-color: #e1f7e7;
-    }
-    .projects h3, .skills h3 {
-      color: #6a4c9c;
-    }
-    footer {
-      background-color: #6a4c9c;
-      color: white;
-      padding: 10px;
-      text-align: center;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Erica Dzifa Agbana — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --midnight: #0b0f1a;
+    --navy: #111827;
+    --navy-light: #1c2436;
+    --border: #252e42;
+    --amber: #f5a623;
+    --amber-dim: #c47d0e;
+    --amber-glow: rgba(245,166,35,0.12);
+    --text: #e8eaf0;
+    --text-muted: #8892a4;
+    --text-dim: #5a6478;
+    --white: #ffffff;
+    --radius: 12px;
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 6%;
+    background: rgba(11,15,26,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem; color: var(--amber); letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-muted); font-size: 0.9rem;
+    font-weight: 500; transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 6% 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black 40%, transparent 100%);
+  }
+  .hero-glow {
+    position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.07) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 780px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+    color: var(--amber); background: var(--amber-glow);
+    border: 1px solid rgba(245,166,35,0.3);
+    padding: 0.35rem 0.9rem; border-radius: 999px;
+    margin-bottom: 2rem; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero-tag::before { content: '▶'; font-size: 0.6rem; }
+  h1.hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.05; color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  h1.hero-name em { color: var(--amber); font-style: italic; }
+  .hero-terminal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+    color: var(--text-muted); margin-bottom: 2rem;
+    min-height: 1.6em;
+  }
+  .hero-terminal .cursor {
+    display: inline-block; width: 2px; height: 1em;
+    background: var(--amber); margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .hero-desc {
+    font-size: 1.05rem; color: var(--text-muted);
+    max-width: 520px; margin-bottom: 2.5rem; line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.8rem; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    text-decoration: none; transition: all var(--transition);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .btn-primary {
+    background: var(--amber); color: var(--midnight);
+    border: none;
+  }
+  .btn-primary:hover { background: #ffc04a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.3); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; color: var(--white); display: block;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text-dim); letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 6%; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--amber);
+    text-transform: uppercase; letter-spacing: 0.15em;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white); margin-bottom: 1rem; line-height: 1.15;
+  }
+  .section-sub { color: var(--text-muted); max-width: 520px; margin-bottom: 3.5rem; }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--navy); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; }
+  .skills-block { display: flex; flex-direction: column; gap: 1.2rem; }
+  .skill-row { display: flex; flex-direction: column; gap: 0.4rem; }
+  .skill-label { font-size: 0.8rem; font-weight: 600; color: var(--text); display: flex; justify-content: space-between; }
+  .skill-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .skill-fill {
+    height: 100%; background: linear-gradient(90deg, var(--amber-dim), var(--amber));
+    border-radius: 2px; width: 0;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; padding: 0.3rem 0.75rem;
+    background: var(--navy-light); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text-muted);
+  }
+
+  /* ─── EXPERIENCE ─── */
+  #experience { background: var(--midnight); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item {
+    padding-left: 2.5rem; padding-bottom: 3rem; position: relative;
+    opacity: 0; transform: translateY(20px);
+    transition: all 0.5s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateY(0); }
+  .timeline-dot {
+    position: absolute; left: -5px; top: 8px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--amber); border: 2px solid var(--midnight);
+    box-shadow: 0 0 0 3px rgba(245,166,35,0.2);
+  }
+  .timeline-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; color: var(--amber); margin-bottom: 0.4rem; letter-spacing: 0.05em;
+  }
+  .timeline-role { font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+  .timeline-company { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+  .timeline-bullets { list-style: none; padding: 0; }
+  .timeline-bullets li {
+    font-size: 0.9rem; color: var(--text-muted); padding: 0.25rem 0;
+    padding-left: 1rem; position: relative; line-height: 1.6;
+  }
+  .timeline-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--amber-dim); }
+
+  /* ─── PROJECTS ─── */
+  #projects { background: var(--navy); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--midnight); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.75rem;
+    transition: all var(--transition); cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--amber-dim), var(--amber));
+    transform: scaleX(0); transition: transform var(--transition); transform-origin: left;
+  }
+  .project-card:hover { border-color: rgba(245,166,35,0.3); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+  .project-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+  .project-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-stack span {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+    padding: 0.2rem 0.6rem; background: var(--amber-glow);
+    border: 1px solid rgba(245,166,35,0.2); border-radius: 4px; color: var(--amber);
+  }
+
+  /* ─── CERTIFICATIONS ─── */
+  #certifications { background: var(--midnight); }
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+  .cert-card {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--navy); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+    transition: all var(--transition);
+  }
+  .cert-card:hover { border-color: rgba(245,166,35,0.3); background: var(--navy-light); }
+  .cert-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: var(--amber-glow); border: 1px solid rgba(245,166,35,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .cert-name { font-size: 0.875rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+  .cert-issuer { font-size: 0.75rem; color: var(--text-dim); }
+
+  /* ─── EDUCATION ─── */
+  #education { background: var(--navy); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 1.5rem; }
+  .edu-card {
+    background: var(--midnight); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2rem;
+    transition: border-color var(--transition);
+  }
+  .edu-card:hover { border-color: rgba(245,166,35,0.3); }
+  .edu-school { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+  .edu-degree { font-size: 0.875rem; color: var(--amber); margin-bottom: 0.5rem; font-weight: 500; }
+  .edu-meta { font-size: 0.8rem; color: var(--text-muted); }
+  .edu-badge {
+    display: inline-block; margin-top: 0.75rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    padding: 0.25rem 0.7rem; background: var(--amber-glow);
+    border: 1px solid rgba(245,166,35,0.2); border-radius: 4px; color: var(--amber);
+  }
+
+  /* ─── COMMUNITY ─── */
+  #community { background: var(--midnight); }
+  .community-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.2rem; }
+  .community-card {
+    background: var(--navy); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem;
+    transition: all var(--transition);
+  }
+  .community-card:hover { border-color: rgba(245,166,35,0.3); transform: translateY(-2px); }
+  .community-role { font-size: 0.75rem; font-weight: 600; color: var(--amber); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+  .community-org { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+  .community-period { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .community-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--navy); }
+  .contact-wrapper {
+    max-width: 600px;
+    background: var(--midnight); border: 1px solid var(--border);
+    border-radius: 16px; padding: 3rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem; border-radius: 10px;
+    background: var(--navy); border: 1px solid var(--border);
+    text-decoration: none; color: var(--text); transition: all var(--transition);
+  }
+  .contact-link:hover { border-color: rgba(245,166,35,0.4); background: var(--navy-light); color: var(--amber); }
+  .contact-link-icon { font-size: 1.2rem; }
+  .contact-link-label { font-size: 0.8rem; color: var(--text-dim); display: block; }
+  .contact-link-val { font-size: 0.9rem; font-weight: 600; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 6%; background: var(--midnight);
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer p { font-size: 0.8rem; color: var(--text-dim); }
+  footer a { color: var(--amber); text-decoration: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 5%; }
+    .nav-links { gap: 1.2rem; }
+    #hero { padding: 7rem 5% 4rem; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    section { padding: 4rem 5%; }
+    .contact-wrapper { padding: 2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skill-fill { transition: none; }
+    .timeline-item { transition: none; opacity: 1; transform: none; }
+  }
+</style>
 </head>
 <body>
 
-<header>
-  <h1>Erica Dzifa Agbana</h1>
-  <p>Aspiring AI Research Scientist | Computer Science | AI/ML Enthusiast</p>
-</header>
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">erica.agbana</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-<section>
-  <h2>About Me</h2>
-  <p>I am a Computer Science student passionate about Artificial Intelligence and Machine Learning. I am always eager to explore new technologies and create impactful solutions. My goal is to apply my knowledge in AI to solve real-world challenges.</p>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1 class="hero-name">Erica Dzifa<br><em>Agbana</em></h1>
+    <div class="hero-terminal" id="terminal"><span id="typed"></span><span class="cursor"></span></div>
+    <p class="hero-desc">Computer Science student at Academic City University College, Accra. I turn data into decisions and ideas into working products — from ML models to full-stack applications.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View My Work ↓</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num">2+</span><span class="stat-label">Years of experience</span></div>
+      <div class="stat-item"><span class="stat-num">4+</span><span class="stat-label">Projects built</span></div>
+      <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Certifications</span></div>
+    </div>
+  </div>
 </section>
 
-<section>
-  <h2>Skills</h2>
-  <div class="skills">
-    <div>
-      <h3>Programming Languages</h3>
-      <ul>
-        <li>Python</li>
-        <li>Java</li>
-        <li>C</li>
-        <li>C++</li>
-        <li>SQL</li>
-        <li>HTML</li>
-        <li>CSS</li>
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-eyebrow">// about me</div>
+  <h2 class="section-title">Data. Code. Impact.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a fourth-year Computer Science student based in Accra, Ghana with a passion for turning complex data into clear, actionable insight. My work spans data analysis, machine learning, and web development — I enjoy the full journey from raw dataset to polished product.</p>
+      <p>I've had the opportunity to work in real environments — from analyzing operational data at Aviation Profile and Security Service to performing QA at Ecobank-eProcess International — and I bring that practical mindset to every project I build.</p>
+      <p>When I'm not coding, I'm active in the Google Developer Group and Academic City's student community, contributing to hackathons and campus initiatives.</p>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">Java</span>
+        <span class="tag">SQL</span><span class="tag">React</span><span class="tag">Flask</span>
+        <span class="tag">TensorFlow</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span>
+        <span class="tag">NumPy</span><span class="tag">Git</span><span class="tag">Node.js</span>
+      </div>
+    </div>
+    <div class="skills-block" id="skillsBlock">
+      <div class="skill-row">
+        <div class="skill-label"><span>Python & Data Science</span><span>90%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>Machine Learning</span><span>80%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>Web Development</span><span>78%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>Data Analysis & Excel</span><span>85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>SQL & Databases</span><span>72%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>Cybersecurity Fundamentals</span><span>65%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow">// experience</div>
+  <h2 class="section-title">Where I've Worked</h2>
+  <p class="section-sub">Real-world experience across data analysis, QA, and service operations.</p>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">June 2025 – August 2025</div>
+      <div class="timeline-role">Service Desk Analyst Intern</div>
+      <div class="timeline-company">Ecobank-eProcess International</div>
+      <ul class="timeline-bullets">
+        <li>Performed QA checks on 1,000+ tickets, achieving 98% accuracy and resolving 20+ process inefficiencies</li>
+        <li>Managed XLA communications — sending reminders and follow-ups to ensure stakeholder responsiveness</li>
+        <li>Reviewed feedback from 200+ customers and escalated issues, contributing to a 20% improvement in satisfaction</li>
       </ul>
     </div>
-    <div>
-      <h3>Technologies & Tools</h3>
-      <ul>
-        <li>JFrame</li>
-        <li>Machine Learning</li>
-        <li>Data Analysis</li>
-        <li>Web Development</li>
-        <li>Database Management</li>
-        <li>GUI Design</li>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">May 2024 – July 2024</div>
+      <div class="timeline-role">Data Analyst Intern</div>
+      <div class="timeline-company">Aviation Profile and Security Service</div>
+      <ul class="timeline-bullets">
+        <li>Collected, cleaned, and analyzed datasets using Python (Pandas, NumPy) and Excel to surface operational trends</li>
+        <li>Developed automated reports and dashboards to track employee performance, attendance, and training</li>
+        <li>Maintained data accuracy and confidentiality while handling sensitive employee records</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section>
-  <h2>Projects</h2>
-  <div class="projects">
-    <div>
-      <h3>Library Fine Calculator</h3>
-      <p>A Java desktop app to manage library fines with predictive analytics for overdue risk, user login, fine tracking, and data visualization. Integrated file and MySQL storage systems.</p>
-      <p><strong>Technologies used:</strong> Java, MySQL, GUI</p>
-      <a href="https://github.com/Michaelkelly71/Acity_CPP_Project/tree/main/Acity_JAVA_Project/Erica%20Agbana%2010012300048" target="_blank">GitHub Link</a>
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-eyebrow">// projects</div>
+  <h2 class="section-title">Things I've Built</h2>
+  <p class="section-sub">A selection of data science and ML projects — each starting with a question and ending with insight.</p>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">🔍</div>
+      <div class="project-title">Customer Segmentation Analysis</div>
+      <div class="project-desc">Applied K-Means clustering and PCA to retail data to identify distinct customer groups by spending behaviour, generating insights to drive targeted marketing strategies.</div>
+      <div class="project-stack">
+        <span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>Matplotlib</span>
+      </div>
     </div>
-
-    <div>
-      <h3>Linear Regression Model for House Price Prediction</h3>
-      <p>Built a linear regression model to predict house prices based on selected features from a real estate dataset.</p>
-      <p><strong>Technologies used:</strong> Python</p>
-      <a href="https://github.com/ericaadag/PRODIGY_ML_01" target="_blank">GitHub Link</a>
+    <div class="project-card">
+      <div class="project-icon">🏠</div>
+      <div class="project-title">House Price Prediction</div>
+      <div class="project-desc">Built a Linear Regression model on a Kaggle dataset to predict house prices. Covered full pipeline: EDA, preprocessing, feature selection, and evaluation with MAE, RMSE, and R².</div>
+      <div class="project-stack">
+        <span>Python</span><span>Scikit-learn</span><span>NumPy</span><span>Seaborn</span>
+      </div>
     </div>
-
-    <div>
-      <h3>K-Means Clustering Algorithm</h3>
-      <p>Created a K-means clustering algorithm to segment customers of a retail store based on their annual income and spending score.</p>
-      <p><strong>Technologies used:</strong> Python</p>
-      <a href="https://github.com/ericaadag/PRODIGY_ML_02" target="_blank">GitHub Link</a>
-    </div>
-
-    <div>
-      <h3>Payment Management System</h3>
-      <p>A payroll management system using CRUD operations, implemented in Java with a GUI and connected to a database for employee management.</p>
-      <p><strong>Technologies used:</strong> Java, GUI</p>
-      <a href="https://github.com/ericaadag/PMS_java" target="_blank">GitHub Link</a>
-    </div>
-
-    <div>
-      <h3>Factorial Calculator</h3>
-      <p>A simple Java-based GUI application to calculate the factorial of a number in real-time.</p>
-      <p><strong>Technologies used:</strong> Java, GUI</p>
-      <a href="https://github.com/ericaadag/Erica_Java/blob/main/FactorialCalculator.java" target="_blank">GitHub Link</a>
-    </div>
-
-    <div>
-      <h3>Simple Calculator</h3>
-      <p>Developed a basic calculator in Java using a GUI that performs basic arithmetic operations like addition, subtraction, multiplication, and division.</p>
-      <p><strong>Technologies used:</strong> Java, GUI</p>
-      <a href="https://github.com/ericaadag/Erica_Java/blob/main/Calculator.java" target="_blank">GitHub Link</a>
-    </div>
-
-    <div>
-      <h3>Student Data File Manager</h3>
-      <p>A student data management system that allows users to add, update, and delete student records. The data is stored in files, with a user-friendly GUI.</p>
-      <p><strong>Technologies used:</strong> Java, GUI</p>
-      <a href="https://github.com/ericaadag/Erica_Java1/blob/main/StudentDataFile.java" target="_blank">GitHub Link</a>
-    </div>
-
-    <div>
-      <h3>GPA Calculator</h3>
-      <p>A GPA calculator that computes a student's GPA based on course credit hours and grades. All data is stored in a file for easy retrieval and updating.</p>
-      <p><strong>Technologies used:</strong> Java, GUI</p>
-      <a href="https://github.com/Michaelkelly71/Acity_CPP_Project/tree/main/Acity_JAVA_Exam/Erica%20Agbana_10012300048" target="_blank">GitHub Link</a>
+    <div class="project-card">
+      <div class="project-icon">📊</div>
+      <div class="project-title">Employee Analytics Dashboard</div>
+      <div class="project-desc">Automated reporting and dashboards for tracking employee performance, attendance, and training during internship — reducing manual reporting time significantly.</div>
+      <div class="project-stack">
+        <span>Python</span><span>Pandas</span><span>Excel</span><span>NumPy</span>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-eyebrow">// certifications</div>
+  <h2 class="section-title">Credentials</h2>
+  <p class="section-sub">Certifications that validate my breadth across security, AI, and software engineering.</p>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🔐</div>
+      <div><div class="cert-name">Cybersecurity Fundamentals</div><div class="cert-issuer">IBM / Coursera</div></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🤖</div>
+      <div><div class="cert-name">Artificial Intelligence Fundamentals</div><div class="cert-issuer">IBM / Coursera</div></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">💻</div>
+      <div><div class="cert-name">Software Engineering Job Simulation</div><div class="cert-issuer">Electronic Arts (Forage)</div></div>
+    </div>
+  </div>
+</section>
 
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-eyebrow">// education</div>
+  <h2 class="section-title">Academic Background</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-school">Academic City University College</div>
+      <div class="edu-degree">B.Sc. Computer Science</div>
+      <div class="edu-meta">Accra, Ghana · Graduating June 2027</div>
+      <span class="edu-badge">CWA: 72.43 / 100</span>
+    </div>
+    <div class="edu-card">
+      <div class="edu-school">Accra Girls' Senior High School</div>
+      <div class="edu-degree">General Science</div>
+      <div class="edu-meta">Accra, Ghana · November 2019 – September 2022</div>
+      <span class="edu-badge">GPA: 3.7 / 4.0</span>
+    </div>
+  </div>
+</section>
 
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="section-eyebrow">// community</div>
+  <h2 class="section-title">Community & Volunteering</h2>
+  <div class="community-grid">
+    <div class="community-card">
+      <div class="community-role">Committee Member</div>
+      <div class="community-org">Academic City Student Council</div>
+      <div class="community-period">April 2025 – March 2026</div>
+      <div class="community-desc">Collaborating with fellow committee members to plan, organize, and execute student events and campus initiatives.</div>
+    </div>
+    <div class="community-card">
+      <div class="community-role">Member</div>
+      <div class="community-org">Google Developer Group</div>
+      <div class="community-period">January 2024 – Present</div>
+      <div class="community-desc">Participating in tech meetups, workshops, and hackathons covering Android, TensorFlow, and Google Cloud — sharing knowledge across AI/ML and software development.</div>
+    </div>
+    <div class="community-card">
+      <div class="community-role">Volunteer</div>
+      <div class="community-org">GDG ACity Hackathon 1.0</div>
+      <div class="community-period">October 2025</div>
+      <div class="community-desc">Supported participant registration, logistics, and event coordination to ensure smooth operations at Academic City's flagship hackathon.</div>
+    </div>
+  </div>
+</section>
 
+<!-- CONTACT -->
 <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:erica.agbana@acity.edu.gh">erica.agbana@acity.edu.gh</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/erica-agbana-9b1460306/" target="_blank">linkedin.com/in/erica-agbana-9b1460306</a></p>
-    <p>GitHub: <a href="https://github.com/ericaadag" target="_blank">github.com/ericaadag</a></p>
-  </section>
+  <div class="section-eyebrow">// contact</div>
+  <h2 class="section-title">Let's Connect</h2>
+  <div class="contact-wrapper">
+    <p style="color:var(--text-muted); margin-bottom: 0.5rem;">I'm open to internships, collaborative projects, and any interesting opportunities. Don't hesitate to reach out.</p>
+    <div class="contact-links">
+      <a href="mailto:erica.dagbana@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉️</span>
+        <div><span class="contact-link-label">Email</span><span class="contact-link-val">erica.dagbana@gmail.com</span></div>
+      </a>
+      <a href="https://www.linkedin.com/in/erica-dzifa-agbana" target="_blank" class="contact-link">
+        <span class="contact-link-icon">💼</span>
+        <div><span class="contact-link-label">LinkedIn</span><span class="contact-link-val">erica-dzifa-agbana</span></div>
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-icon">🐙</span>
+        <div><span class="contact-link-label">GitHub</span><span class="contact-link-val">Add your GitHub handle</span></div>
+      </a>
+      <a href="tel:+233554661099" class="contact-link">
+        <span class="contact-link-icon">📞</span>
+        <div><span class="contact-link-label">Phone</span><span class="contact-link-val">+233 554 661 099</span></div>
+      </a>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <p>© 2025 Erica Dzifa Agbana</p>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Erica Dzifa Agbana · Accra, Ghana 🇬🇭</p>
+  <p>Built with intention · <a href="#hero">Back to top ↑</a></p>
+</footer>
+
+<script>
+  // ── Typing animation ──
+  const phrases = [
+    'Data Scientist & ML Engineer',
+    'Full-Stack Developer',
+    'Computer Science Student @ ACity',
+    'Building for impact in Africa & beyond'
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typed');
+  function type() {
+    const phrase = phrases[pi];
+    if (!deleting) {
+      el.textContent = phrase.slice(0, ci + 1);
+      ci++;
+      if (ci === phrase.length) { deleting = true; setTimeout(type, 2000); return; }
+    } else {
+      el.textContent = phrase.slice(0, ci - 1);
+      ci--;
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 40 : 65);
+  }
+  type();
+
+  // ── Skill bars on scroll ──
+  const skillsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+        skillsObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const sb = document.getElementById('skillsBlock');
+  if (sb) skillsObs.observe(sb);
+
+  // ── Timeline reveal ──
+  const tlObs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 150);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.timeline-item').forEach(el => tlObs.observe(el));
+</script>
 </body>
 </html>
